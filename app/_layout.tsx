@@ -1,39 +1,57 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+// eslint-disable-next-line prettier/prettier
+import '@formatjs/intl-getcanonicallocales/polyfill';
+// eslint-disable-next-line prettier/prettier
+import '@formatjs/intl-locale/polyfill';
+// eslint-disable-next-line prettier/prettier
+import '@formatjs/intl-pluralrules/polyfill-force';
+// eslint-disable-next-line prettier/prettier
+import '@formatjs/intl-pluralrules/locale-data/en';
+
+import '@/assets/css/global.css';
+import { BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
+import { Image } from 'expo-image';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Slot } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
+import { cssInterop } from 'nativewind';
 import { useEffect } from 'react';
-import 'react-native-reanimated';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { configureReanimatedLogger, ReanimatedLogLevel } from 'react-native-reanimated';
+import Svg from 'react-native-svg';
+import { IntlProvider } from 'use-intl';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+import StoreProvider from '@/components/providers/store';
+import UIToaster from '@/components/ui/toaster';
+import locales from '@/locales';
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
+configureReanimatedLogger({
+  level: ReanimatedLogLevel.warn,
+  strict: false,
+});
+
 SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
+cssInterop(Image, { className: 'style' });
+cssInterop(Svg, { className: 'style' });
+cssInterop(LinearGradient, { className: 'style' });
+cssInterop(BottomSheetView, { className: 'style' });
+export default function Layout() {
   useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
+    setTimeout(() => SplashScreen.hideAsync(), 1000);
+  }, []);
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <IntlProvider messages={locales['en']} locale="en">
+      <StoreProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <StatusBar style="light" />
+          <BottomSheetModalProvider>
+            <Slot />
+          </BottomSheetModalProvider>
+          <UIToaster />
+        </GestureHandlerRootView>
+      </StoreProvider>
+    </IntlProvider>
   );
 }
