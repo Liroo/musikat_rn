@@ -1,0 +1,22 @@
+{
+  "pitch_comparison": {
+    "title": "Aigu ou grave",
+    "description": "Devine si la 2e note est plus aiguë ou plus grave que la 1re."
+  },
+  "interval_comparison": {
+    "title": "Quelle intervalle est plus grand ?",
+    "description": "Deux intervalles joués, à toi de dire lequel est le plus large."
+  },
+  "find_interval_easy": {
+    "title": "Trouve l'intervalle (facile)",
+    "description": "Devine l'intervalle parmi des propositions."
+  },
+  "find_interval_expert": {
+    "title": "Trouve l'intervalle (expert)",
+    "description": "Un seul essai, choisis parmi tous les intervalles possibles."
+  },
+  "note_and_interval": {
+    "title": "Une note un intervalle",
+    "description": "Avec une note et un intervalle trouve la note correspondante."
+  }
+}

@@ -1,9 +1,6 @@
-import Svg, { Path, SvgProps } from "react-native-svg";
+import Svg, { Path, SvgProps } from 'react-native-svg';
 
-export default function SvgNavigationChevronLeft({
-  fill = "white",
-  ...props
-}: SvgProps) {
+export default function SvgNavigationChevronLeft({ fill = 'white', ...props }: SvgProps) {
   return (
     <Svg width={24} height={24} viewBox="0 0 24 24" {...props}>
       <Path

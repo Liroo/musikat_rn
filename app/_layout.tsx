@@ -42,7 +42,7 @@ export default function Layout() {
   }, []);
 
   return (
-    <IntlProvider messages={locales['en']} locale="en">
+    <IntlProvider messages={locales['fr']} locale="fr">
       <StoreProvider>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <StatusBar style="light" />

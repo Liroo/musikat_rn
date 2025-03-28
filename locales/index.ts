@@ -1,8 +1,8 @@
 export default {
-  en: {
-    commons: require('./en/commons.json'),
+  fr: {
+    commons: require('./fr/commons.json'),
     features: {
-      test: require('./en/features/test.json'),
+      learn: require('./fr/features/learn.json'),
     },
   },
 };

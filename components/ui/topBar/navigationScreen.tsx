@@ -9,7 +9,6 @@ import SvgNavigationCross from '@/components/svg/navigation/cross';
 import { twMerge } from '@/utils/twMerge';
 
 type UITopBarNavigationScreenProps = {
-  eventName: string;
   title?: string;
   children?: React.ReactNode;
   onClickLeftIcon?: () => void;
@@ -28,7 +27,6 @@ export default function UITopBarNavigationScreen({
   leftIconRender,
   isModal,
   rightIconRender = null,
-  eventName,
   className,
 }: UITopBarNavigationScreenProps) {
   const { top } = useSafeAreaInsets();
@@ -56,7 +54,7 @@ export default function UITopBarNavigationScreen({
         )}
         {title && (
           <View className="pointer-events-none absolute top-0 mx-[16px] flex h-[52px] w-full items-center justify-center">
-            <Text className="text-headline4 text-center font-semibold text-white">{title}</Text>
+            <Text className="text-center text-headline4 font-semibold text-white">{title}</Text>
           </View>
         )}
         {children}

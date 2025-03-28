@@ -1,9 +1,6 @@
-import Svg, { Path, SvgProps } from "react-native-svg";
+import Svg, { Path, SvgProps } from 'react-native-svg';
 
-export default function SvgNavigationCross({
-  fill = "white",
-  ...rest
-}: SvgProps) {
+export default function SvgNavigationCross({ fill = 'white', ...rest }: SvgProps) {
   return (
     <Svg width={24} height={24} viewBox="0 0 20 20" {...rest}>
       <Path
