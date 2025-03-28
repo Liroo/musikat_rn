@@ -12,12 +12,19 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   jsEngine: 'hermes',
   backgroundColor: '#000000',
   ios: {
+    runtimeVersion: '0.1.0',
     supportsTablet: true,
-    bundleIdentifier: 'com.liroo.musikat',
-    // appStoreUrl: "https://apps.apple.com/app/1640070710",
+    bundleIdentifier: 'com.liroodev.musikat',
+    appStoreUrl: 'https://apps.apple.com/app/6743946329',
     googleServicesFile: './credentials/firebase/GoogleService-Info.plist',
+    infoPlist: {
+      ITSAppUsesNonExemptEncryption: false,
+    },
   },
   android: {
+    runtimeVersion: {
+      policy: 'appVersion',
+    },
     adaptiveIcon: {
       foregroundImage: './assets/images/adaptive-icon.png',
       backgroundColor: '#ffffff',
@@ -57,5 +64,15 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ],
   experiments: {
     typedRoutes: true,
+  },
+  extra: {
+    eas: {
+      projectId: '2283758e-c154-423f-bc3e-351caf9d567b',
+    },
+  },
+  owner: 'liroo',
+
+  updates: {
+    url: 'https://u.expo.dev/2283758e-c154-423f-bc3e-351caf9d567b',
   },
 });

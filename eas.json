@@ -1,0 +1,40 @@
+{
+  "cli": {
+    "version": ">= 12.6.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "preview": {
+      "channel": "preview",
+      "autoIncrement": true,
+      "distribution": "store",
+      "env": {
+        // # Misc
+        "EXPO_PUBLIC_ENV": "preview"
+      }
+    },
+    "production": {
+      "channel": "production",
+      "autoIncrement": true,
+      "distribution": "store",
+      "env": {
+        // # Misc
+        "EXPO_PUBLIC_ENV": "production"
+      }
+    }
+  },
+  "submit": {
+    "preview": {
+      "ios": {
+        "ascAppId": "6743946329",
+        "appleTeamId": "NW5MADZU44"
+      }
+    },
+    "production": {
+      "ios": {
+        "ascAppId": "6743946329",
+        "appleTeamId": "NW5MADZU44"
+      }
+    }
+  }
+}
