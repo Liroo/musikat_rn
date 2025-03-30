@@ -77,7 +77,7 @@ export const Notes: Note[] = [
   { note: 'C', octave: 5, filename: 'C5.mp3', frequency: 523.25 },
   { note: 'C', octave: 6, filename: 'C6.mp3', frequency: 1046.5 },
   { note: 'C', octave: 7, filename: 'C7.mp3', frequency: 2093.0 },
-  { note: 'C', octave: 8, filename: 'C8.mp3', frequency: 4186.01 },
+  // { note: 'C', octave: 8, filename: 'C8.mp3', frequency: 4186.01 }, // iPhone doesn't support this
 
   // D♭/C# notes
   { note: 'C', modifier: '#', octave: 1, filename: 'Db1.mp3', frequency: 34.65 },

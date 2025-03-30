@@ -20,9 +20,11 @@ export default function useIntervalComparison() {
   } = useExercise<ExerciseType.IntervalComparison>(ExerciseType.IntervalComparison);
 
   const interval = useMemo(() => {
+    if (!currentQuestion) return null;
     return currentQuestion?.intervals[currentQuestion.correctIndex];
   }, [currentQuestion]);
   const otherInterval = useMemo(() => {
+    if (!currentQuestion) return null;
     return currentQuestion?.intervals[currentQuestion.correctIndex === 0 ? 1 : 0];
   }, [currentQuestion]);
 
@@ -34,7 +36,7 @@ export default function useIntervalComparison() {
   };
 
   const correctMessageData = useMemo(() => {
-    if (!currentQuestion || !interval) return {};
+    if (!currentQuestion || !interval || !otherInterval) return {};
 
     const intervalTKey =
       interval.intervalType === IntervalType.Ascending ? 'ascending' : 'descending';
@@ -67,7 +69,7 @@ export default function useIntervalComparison() {
   }, [currentQuestion]);
 
   const incorrectMessageData = useMemo(() => {
-    if (!currentQuestion || !interval) return {};
+    if (!currentQuestion || !interval || !otherInterval) return {};
 
     const intervalTKey =
       interval.intervalType === IntervalType.Ascending ? 'ascending' : 'descending';
