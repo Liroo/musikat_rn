@@ -21,7 +21,7 @@ export default function LearnPitchComparison() {
         <LearnPitchComparisonCompleted />
       ) : (
         <>
-          <LearnTopBar />
+          <LearnTopBar onPressBack={exercise.resetExercise} />
 
           {exercise.exerciseData.state === ExerciseState.Idle ? (
             <LearnPitchComparisonPresentation />

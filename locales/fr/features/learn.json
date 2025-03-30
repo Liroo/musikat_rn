@@ -8,7 +8,53 @@
     "F": "Fa{octave}{modifier}",
     "G": "Sol{octave}{modifier}"
   },
-  "interval": {},
+  "interval": {
+    "ascending": {
+      "P1": "Unisson juste",
+      "m2": "Seconde mineure",
+      "M2": "Seconde majeure",
+      "m3": "Troisième mineure",
+      "M3": "Troisième majeure",
+      "P4": "Quarte juste",
+      "TT": "Triton",
+      "P5": "Quinte juste",
+      "m6": "Sixte mineure",
+      "M6": "Sixte majeure",
+      "m7": "Septième mineure",
+      "M7": "Septième majeure",
+      "P8": "Octave juste"
+    },
+    "descending": {
+      "P1": "Unisson juste descendant",
+      "m2": "Seconde mineure descendante",
+      "M2": "Seconde majeure descendante",
+      "m3": "Troisième mineure descendante",
+      "M3": "Troisième majeure descendante",
+      "P4": "Quarte juste descendante",
+      "TT": "Triton descendante",
+      "P5": "Quinte juste descendante",
+      "m6": "Sixte mineure descendante",
+      "M6": "Sixte majeure descendante",
+      "m7": "Septième mineure descendante",
+      "M7": "Septième majeure descendante",
+      "P8": "Octave juste descendante"
+    },
+    "gender": {
+      "P1": "un",
+      "m2": "une",
+      "M2": "une",
+      "m3": "une",
+      "M3": "une",
+      "P4": "une",
+      "TT": "un",
+      "P5": "une",
+      "m6": "une",
+      "M6": "une",
+      "m7": "une",
+      "M7": "une",
+      "P8": "une"
+    }
+  },
   "exercise": {
     "progress": "Progrès",
     "correct": "Super !",
@@ -36,8 +82,8 @@
       "continue": "Continuer"
     },
     "answer": {
-      "correct": "Trop fort, tu as raison.",
-      "incorrect": "Mince, la bonne réponse était {correct_note}."
+      "correct": "Trop fort, tu as raison. Entre ces notes il y a {semitones} demi-tons, et ça s'appelle une {interval}.",
+      "incorrect": "Mince, la bonne réponse était {correct_note}. Entre ces notes il y a {semitones} demi-tons, et ça s'appelle une {interval}."
     }
   },
   "interval_comparison": {

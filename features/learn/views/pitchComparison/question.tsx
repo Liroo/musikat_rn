@@ -7,16 +7,23 @@ import LearnExerciseFooterAnswer from '@/features/learn/components/exercise/foot
 import LearnExerciseProgress from '@/features/learn/components/exercise/progress';
 import LearnExerciseQuestionButton from '@/features/learn/components/exercise/question/button';
 import LearnExerciseQuestionTitle from '@/features/learn/components/exercise/question/title';
-import useExercise from '@/features/learn/hooks/useExercise';
-import { ExerciseType } from '@/features/learn/types/exercise';
-import { Instrument, Tone } from '@/features/learn/types/notes';
+import usePitchComparison from '@/features/learn/hooks/usePitchComparison';
+import { Tone } from '@/features/learn/types/notes';
 import { learnFlatNoteToSharpNote } from '@/features/learn/utils/notes';
-import { playNote } from '@/features/learn/utils/sound';
+import { pianoSound } from '@/features/learn/utils/sound';
+import { twMerge } from '@/utils/twMerge';
 
 export default function LearnPitchComparisonQuestion() {
-  const { exerciseData, nextQuestion, answerQuestion, currentQuestion, currentAnswer } =
-    useExercise<ExerciseType.PitchComparison>(ExerciseType.PitchComparison);
   const t = useTranslations('features.learn');
+  const {
+    exerciseData,
+    nextQuestion,
+    answerQuestion,
+    currentQuestion,
+    currentAnswer,
+    correctMessage,
+    incorrectMessage,
+  } = usePitchComparison();
 
   const [selectedButtonIndex, setSelectedButtonIndex] = useState<number | null>(null);
 
@@ -24,8 +31,8 @@ export default function LearnPitchComparisonQuestion() {
 
   const onPressCheck = () => {
     if (currentAnswer) {
+      pianoSound.stopEveryNote();
       nextQuestion();
-      startTimer.current = Date.now();
       return;
     }
 
@@ -41,114 +48,119 @@ export default function LearnPitchComparisonQuestion() {
     setSelectedButtonIndex(null);
   };
 
+  // Intro "animation"
+  const [introIndex, setIntroIndex] = useState(0);
   useEffect(() => {
-    playNote(Instrument.Piano, currentQuestion.notes[0]);
+    setIntroIndex(0);
+    pianoSound.playNote(currentQuestion.notes[0]);
     setTimeout(() => {
-      playNote(Instrument.Piano, currentQuestion.notes[1]);
+      setIntroIndex(1);
+      pianoSound.playNote(currentQuestion.notes[1]);
+      setTimeout(() => {
+        setIntroIndex(-1);
+        startTimer.current = Date.now();
+      }, 500);
     }, 500);
   }, [currentQuestion.id]);
 
   return (
-    <View className="mt-[8px] flex-1">
-      <LearnExerciseProgress
-        currentQuestionIndex={exerciseData.currentQuestionIndex + (currentAnswer ? 1 : 0)}
-        totalQuestions={exerciseData.questions.length}
+    <>
+      <View
+        className={twMerge(
+          'absolute inset-0 z-20 bg-black/50 transition-opacity duration-150',
+          introIndex >= 0 ? 'opacity-100' : 'opacity-0'
+        )}
+        pointerEvents={introIndex >= 0 ? 'auto' : 'none'}
       />
+      <View className="mt-[8px] flex-1">
+        <LearnExerciseProgress
+          currentQuestionIndex={exerciseData.currentQuestionIndex + (currentAnswer ? 1 : 0)}
+          totalQuestions={exerciseData.questions.length}
+        />
 
-      <LearnExerciseQuestionTitle
-        title={
-          currentQuestion.tone === Tone.High
-            ? t('pitch_comparison.question.tone_higher')
-            : t('pitch_comparison.question.tone_lower')
-        }
-      />
+        <LearnExerciseQuestionTitle
+          title={
+            currentQuestion.tone === Tone.High
+              ? t('pitch_comparison.question.tone_higher')
+              : t('pitch_comparison.question.tone_lower')
+          }
+        />
 
-      <View className="mx-[20px] mt-[40%] flex-1 flex-row gap-[10px]">
-        <LearnExerciseQuestionButton
+        <View className="mx-[20px] mt-[40%] flex-1 flex-row gap-[10px]">
+          <LearnExerciseQuestionButton
+            className={introIndex === 0 ? 'pointer-events-none z-50' : ''}
+            label={
+              currentAnswer
+                ? t('notes.' + learnFlatNoteToSharpNote(currentQuestion.notes[0]).note, {
+                    octave: '',
+                    modifier: learnFlatNoteToSharpNote(currentQuestion.notes[0]).modifier || '',
+                  })
+                : t('pitch_comparison.question.button.note', { note: '01' })
+            }
+            correct={
+              currentAnswer &&
+              ((currentAnswer?.noteIndex === 0 && currentAnswer.isCorrect) ||
+                currentQuestion.correctNoteIndex === 0)
+            }
+            incorrect={currentAnswer && currentAnswer?.noteIndex === 0 && !currentAnswer.isCorrect}
+            buttonClassName={
+              (!currentAnswer && selectedButtonIndex === 0) || introIndex === 0
+                ? 'bg-communicative-informative'
+                : ''
+            }
+            onPress={() => {
+              pianoSound.playNote(currentQuestion.notes[0]);
+              if (currentAnswer) return;
+              setSelectedButtonIndex(0);
+            }}
+          />
+          <LearnExerciseQuestionButton
+            className={introIndex === 1 ? 'pointer-events-none z-50' : ''}
+            label={
+              currentAnswer
+                ? t('notes.' + learnFlatNoteToSharpNote(currentQuestion.notes[1]).note, {
+                    octave: '',
+                    modifier: learnFlatNoteToSharpNote(currentQuestion.notes[1]).modifier || '',
+                  })
+                : t('pitch_comparison.question.button.note', { note: '02' })
+            }
+            buttonClassName={
+              (!currentAnswer && selectedButtonIndex === 1) || introIndex === 1
+                ? 'bg-communicative-informative'
+                : ''
+            }
+            correct={
+              currentAnswer &&
+              ((currentAnswer?.noteIndex === 1 && currentAnswer.isCorrect) ||
+                currentQuestion.correctNoteIndex === 1)
+            }
+            incorrect={currentAnswer && currentAnswer?.noteIndex === 1 && !currentAnswer.isCorrect}
+            onPress={() => {
+              pianoSound.playNote(currentQuestion.notes[1]);
+              if (currentAnswer) return;
+              setSelectedButtonIndex(1);
+            }}
+          />
+        </View>
+
+        <LearnExerciseFooter
+          disabled={!currentAnswer && selectedButtonIndex === null}
           label={
             currentAnswer
-              ? t('notes.' + learnFlatNoteToSharpNote(currentQuestion.notes[0]).note, {
-                  octave: '',
-                  modifier: learnFlatNoteToSharpNote(currentQuestion.notes[0]).modifier || '',
-                })
-              : t('pitch_comparison.question.button.note', { note: '01' })
+              ? t('pitch_comparison.footer.continue')
+              : t('pitch_comparison.footer.check')
           }
-          correct={
-            currentAnswer &&
-            ((currentAnswer?.noteIndex === 0 && currentAnswer.isCorrect) ||
-              currentQuestion.correctNoteIndex === 0)
-          }
-          incorrect={currentAnswer && currentAnswer?.noteIndex === 0 && !currentAnswer.isCorrect}
-          buttonClassName={
-            !currentAnswer && selectedButtonIndex === 0 ? 'bg-communicative-informative' : ''
-          }
-          onPress={() => {
-            playNote(Instrument.Piano, currentQuestion.notes[0]);
-            if (currentAnswer) return;
-            setSelectedButtonIndex(0);
-          }}
+          onPress={onPressCheck}
+          className={currentAnswer && !currentAnswer.isCorrect ? 'bg-communicative-negative' : ''}
         />
-        <LearnExerciseQuestionButton
-          label={
-            currentAnswer
-              ? t('notes.' + learnFlatNoteToSharpNote(currentQuestion.notes[1]).note, {
-                  octave: '',
-                  modifier: learnFlatNoteToSharpNote(currentQuestion.notes[1]).modifier || '',
-                })
-              : t('pitch_comparison.question.button.note', { note: '02' })
-          }
-          buttonClassName={
-            !currentAnswer && selectedButtonIndex === 1 ? 'bg-communicative-informative' : ''
-          }
-          correct={
-            currentAnswer &&
-            ((currentAnswer?.noteIndex === 1 && currentAnswer.isCorrect) ||
-              currentQuestion.correctNoteIndex === 1)
-          }
-          incorrect={currentAnswer && currentAnswer?.noteIndex === 1 && !currentAnswer.isCorrect}
-          onPress={() => {
-            playNote(Instrument.Piano, currentQuestion.notes[1]);
-            if (currentAnswer) return;
-            setSelectedButtonIndex(1);
-          }}
-        />
+
+        {currentAnswer && (
+          <LearnExerciseFooterAnswer
+            correct={currentAnswer?.isCorrect ?? false}
+            message={currentAnswer?.isCorrect ? correctMessage : incorrectMessage}
+          />
+        )}
       </View>
-
-      <LearnExerciseFooter
-        disabled={!currentAnswer && selectedButtonIndex === null}
-        label={
-          currentAnswer ? t('pitch_comparison.footer.continue') : t('pitch_comparison.footer.check')
-        }
-        onPress={onPressCheck}
-        className={currentAnswer && !currentAnswer.isCorrect ? 'bg-communicative-negative' : ''}
-      />
-
-      {currentAnswer && (
-        <LearnExerciseFooterAnswer
-          correct={currentAnswer?.isCorrect ?? false}
-          message={
-            currentAnswer?.isCorrect
-              ? t('pitch_comparison.answer.correct', {
-                  correct_note: t(
-                    'notes.' + learnFlatNoteToSharpNote(currentQuestion.notes[0]).note,
-                    {
-                      octave: '',
-                      modifier: learnFlatNoteToSharpNote(currentQuestion.notes[0]).modifier || '',
-                    }
-                  ),
-                })
-              : t('pitch_comparison.answer.incorrect', {
-                  correct_note: t(
-                    'notes.' + learnFlatNoteToSharpNote(currentQuestion.notes[0]).note,
-                    {
-                      octave: '',
-                      modifier: learnFlatNoteToSharpNote(currentQuestion.notes[0]).modifier || '',
-                    }
-                  ),
-                })
-          }
-        />
-      )}
-    </View>
+    </>
   );
 }

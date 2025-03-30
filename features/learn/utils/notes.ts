@@ -63,7 +63,7 @@ export function learnGetIntervalBetweenNotes(
 
   const intervalArray = Object.values(Interval);
   if (semitone > intervalArray.length) throw new Error('Interval out of range');
-  const interval = intervalArray[semitone];
+  const interval = intervalArray[Math.abs(semitone)];
 
   return {
     semitone,

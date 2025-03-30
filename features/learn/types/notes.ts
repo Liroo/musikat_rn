@@ -28,8 +28,6 @@ export enum Interval {
   MinorSeventh = 'm7',
   MajorSeventh = 'M7',
   Octave = 'P8',
-  MinorNinth = 'm9',
-  MajorNinth = 'M9',
 }
 
 export enum IntervalType {
@@ -66,13 +64,13 @@ export const Notes: Note[] = [
   { note: 'C', octave: 8, filename: 'C8.mp3', frequency: 4186.01 },
 
   // D♭/C# notes
-  { note: 'D', modifier: 'b', octave: 1, filename: 'Db1.mp3', frequency: 34.65 },
-  { note: 'D', modifier: 'b', octave: 2, filename: 'Db2.mp3', frequency: 69.3 },
-  { note: 'D', modifier: 'b', octave: 3, filename: 'Db3.mp3', frequency: 138.59 },
-  { note: 'D', modifier: 'b', octave: 4, filename: 'Db4.mp3', frequency: 277.18 },
-  { note: 'D', modifier: 'b', octave: 5, filename: 'Db5.mp3', frequency: 554.37 },
-  { note: 'D', modifier: 'b', octave: 6, filename: 'Db6.mp3', frequency: 1108.73 },
-  { note: 'D', modifier: 'b', octave: 7, filename: 'Db7.mp3', frequency: 2217.46 },
+  { note: 'C', modifier: '#', octave: 1, filename: 'Db1.mp3', frequency: 34.65 },
+  { note: 'C', modifier: '#', octave: 2, filename: 'Db2.mp3', frequency: 69.3 },
+  { note: 'C', modifier: '#', octave: 3, filename: 'Db3.mp3', frequency: 138.59 },
+  { note: 'C', modifier: '#', octave: 4, filename: 'Db4.mp3', frequency: 277.18 },
+  { note: 'C', modifier: '#', octave: 5, filename: 'Db5.mp3', frequency: 554.37 },
+  { note: 'C', modifier: '#', octave: 6, filename: 'Db6.mp3', frequency: 1108.73 },
+  { note: 'C', modifier: '#', octave: 7, filename: 'Db7.mp3', frequency: 2217.46 },
 
   // D notes
   { note: 'D', octave: 1, filename: 'D1.mp3', frequency: 36.71 },
@@ -84,13 +82,13 @@ export const Notes: Note[] = [
   { note: 'D', octave: 7, filename: 'D7.mp3', frequency: 2349.32 },
 
   // E♭/D# notes
-  { note: 'E', modifier: 'b', octave: 1, filename: 'Eb1.mp3', frequency: 38.89 },
-  { note: 'E', modifier: 'b', octave: 2, filename: 'Eb2.mp3', frequency: 77.78 },
-  { note: 'E', modifier: 'b', octave: 3, filename: 'Eb3.mp3', frequency: 155.56 },
-  { note: 'E', modifier: 'b', octave: 4, filename: 'Eb4.mp3', frequency: 311.13 },
-  { note: 'E', modifier: 'b', octave: 5, filename: 'Eb5.mp3', frequency: 622.25 },
-  { note: 'E', modifier: 'b', octave: 6, filename: 'Eb6.mp3', frequency: 1244.51 },
-  { note: 'E', modifier: 'b', octave: 7, filename: 'Eb7.mp3', frequency: 2489.02 },
+  { note: 'D', modifier: '#', octave: 1, filename: 'Eb1.mp3', frequency: 38.89 },
+  { note: 'D', modifier: '#', octave: 2, filename: 'Eb2.mp3', frequency: 77.78 },
+  { note: 'D', modifier: '#', octave: 3, filename: 'Eb3.mp3', frequency: 155.56 },
+  { note: 'D', modifier: '#', octave: 4, filename: 'Eb4.mp3', frequency: 311.13 },
+  { note: 'D', modifier: '#', octave: 5, filename: 'Eb5.mp3', frequency: 622.25 },
+  { note: 'D', modifier: '#', octave: 6, filename: 'Eb6.mp3', frequency: 1244.51 },
+  { note: 'D', modifier: '#', octave: 7, filename: 'Eb7.mp3', frequency: 2489.02 },
 
   // E notes
   { note: 'E', octave: 1, filename: 'E1.mp3', frequency: 41.2 },
@@ -111,13 +109,13 @@ export const Notes: Note[] = [
   { note: 'F', octave: 7, filename: 'F7.mp3', frequency: 2793.83 },
 
   // G♭/F# notes
-  { note: 'G', modifier: 'b', octave: 1, filename: 'Gb1.mp3', frequency: 46.25 },
-  { note: 'G', modifier: 'b', octave: 2, filename: 'Gb2.mp3', frequency: 92.5 },
-  { note: 'G', modifier: 'b', octave: 3, filename: 'Gb3.mp3', frequency: 185 },
-  { note: 'G', modifier: 'b', octave: 4, filename: 'Gb4.mp3', frequency: 370 },
-  { note: 'G', modifier: 'b', octave: 5, filename: 'Gb5.mp3', frequency: 740 },
-  { note: 'G', modifier: 'b', octave: 6, filename: 'Gb6.mp3', frequency: 1480 },
-  { note: 'G', modifier: 'b', octave: 7, filename: 'Gb7.mp3', frequency: 2960 },
+  { note: 'F', modifier: '#', octave: 1, filename: 'Gb1.mp3', frequency: 46.25 },
+  { note: 'F', modifier: '#', octave: 2, filename: 'Gb2.mp3', frequency: 92.5 },
+  { note: 'F', modifier: '#', octave: 3, filename: 'Gb3.mp3', frequency: 185 },
+  { note: 'F', modifier: '#', octave: 4, filename: 'Gb4.mp3', frequency: 370 },
+  { note: 'F', modifier: '#', octave: 5, filename: 'Gb5.mp3', frequency: 740 },
+  { note: 'F', modifier: '#', octave: 6, filename: 'Gb6.mp3', frequency: 1480 },
+  { note: 'F', modifier: '#', octave: 7, filename: 'Gb7.mp3', frequency: 2960 },
 
   // G notes
   { note: 'G', octave: 1, filename: 'G1.mp3', frequency: 48.99 },
@@ -129,13 +127,13 @@ export const Notes: Note[] = [
   { note: 'G', octave: 7, filename: 'G7.mp3', frequency: 3135.96 },
 
   // A♭/G# notes
-  { note: 'A', modifier: 'b', octave: 1, filename: 'Ab1.mp3', frequency: 51.91 },
-  { note: 'A', modifier: 'b', octave: 2, filename: 'Ab2.mp3', frequency: 103.83 },
-  { note: 'A', modifier: 'b', octave: 3, filename: 'Ab3.mp3', frequency: 207.65 },
-  { note: 'A', modifier: 'b', octave: 4, filename: 'Ab4.mp3', frequency: 415.3 },
-  { note: 'A', modifier: 'b', octave: 5, filename: 'Ab5.mp3', frequency: 830.61 },
-  { note: 'A', modifier: 'b', octave: 6, filename: 'Ab6.mp3', frequency: 1661.22 },
-  { note: 'A', modifier: 'b', octave: 7, filename: 'Ab7.mp3', frequency: 3322.44 },
+  { note: 'G', modifier: '#', octave: 1, filename: 'Ab1.mp3', frequency: 51.91 },
+  { note: 'G', modifier: '#', octave: 2, filename: 'Ab2.mp3', frequency: 103.83 },
+  { note: 'G', modifier: '#', octave: 3, filename: 'Ab3.mp3', frequency: 207.65 },
+  { note: 'G', modifier: '#', octave: 4, filename: 'Ab4.mp3', frequency: 415.3 },
+  { note: 'G', modifier: '#', octave: 5, filename: 'Ab5.mp3', frequency: 830.61 },
+  { note: 'G', modifier: '#', octave: 6, filename: 'Ab6.mp3', frequency: 1661.22 },
+  { note: 'G', modifier: '#', octave: 7, filename: 'Ab7.mp3', frequency: 3322.44 },
 
   // A notes
   { note: 'A', octave: 0, filename: 'A0.mp3', frequency: 27.5 },
@@ -148,14 +146,14 @@ export const Notes: Note[] = [
   { note: 'A', octave: 7, filename: 'A7.mp3', frequency: 3520 },
 
   // B♭/A# notes
-  { note: 'B', modifier: 'b', octave: 0, filename: 'Bb0.mp3', frequency: 24.5 },
-  { note: 'B', modifier: 'b', octave: 1, filename: 'Bb1.mp3', frequency: 58.27 },
-  { note: 'B', modifier: 'b', octave: 2, filename: 'Bb2.mp3', frequency: 116.54 },
-  { note: 'B', modifier: 'b', octave: 3, filename: 'Bb3.mp3', frequency: 233.08 },
-  { note: 'B', modifier: 'b', octave: 4, filename: 'Bb4.mp3', frequency: 466.16 },
-  { note: 'B', modifier: 'b', octave: 5, filename: 'Bb5.mp3', frequency: 932.33 },
-  { note: 'B', modifier: 'b', octave: 6, filename: 'Bb6.mp3', frequency: 1864.66 },
-  { note: 'B', modifier: 'b', octave: 7, filename: 'Bb7.mp3', frequency: 3729.31 },
+  { note: 'A', modifier: '#', octave: 0, filename: 'Bb0.mp3', frequency: 24.5 },
+  { note: 'A', modifier: '#', octave: 1, filename: 'Bb1.mp3', frequency: 58.27 },
+  { note: 'A', modifier: '#', octave: 2, filename: 'Bb2.mp3', frequency: 116.54 },
+  { note: 'A', modifier: '#', octave: 3, filename: 'Bb3.mp3', frequency: 233.08 },
+  { note: 'A', modifier: '#', octave: 4, filename: 'Bb4.mp3', frequency: 466.16 },
+  { note: 'A', modifier: '#', octave: 5, filename: 'Bb5.mp3', frequency: 932.33 },
+  { note: 'A', modifier: '#', octave: 6, filename: 'Bb6.mp3', frequency: 1864.66 },
+  { note: 'A', modifier: '#', octave: 7, filename: 'Bb7.mp3', frequency: 3729.31 },
 
   // B notes
   { note: 'B', octave: 0, filename: 'B0.mp3', frequency: 29.14 },

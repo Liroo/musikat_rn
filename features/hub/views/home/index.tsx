@@ -57,7 +57,11 @@ export default function HubHome() {
         className="mt-[-20px] bg-[#4558C8]"
         tint="white"
         title={t('features.learn.find_interval.title')}
-        tags={[t('commons.difficulty.hard'), t('commons.category.theory')]}
+        tags={[
+          t('commons.difficulty.hard'),
+          t('commons.category.ear'),
+          t('commons.category.theory'),
+        ]}
       />
       <HubHomeExercise
         onPress={() => onPressExercise(ExerciseType.NoteAndInterval)}
