@@ -1,5 +1,5 @@
-import { View } from 'react-native';
+import HubSettings from '@/features/hub/views/settings';
 
 export default function Index() {
-  return <View className="flex flex-1 items-center justify-center bg-black" />;
+  return <HubSettings />;
 }

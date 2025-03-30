@@ -1,22 +1,55 @@
 {
+  "notes": {
+    "A": "La{octave}{modifier}",
+    "B": "Si{octave}{modifier}",
+    "C": "Do{octave}{modifier}",
+    "D": "Ré{octave}{modifier}",
+    "E": "Mi{octave}{modifier}",
+    "F": "Fa{octave}{modifier}",
+    "G": "Sol{octave}{modifier}"
+  },
+  "interval": {},
+  "exercise": {
+    "progress": "Progrès",
+    "correct": "Super !",
+    "incorrect": "Oops...",
+    "completed": "Exercice<br></br>terminé!",
+    "finish": "Terminer",
+    "wrong": "MAUVAIS",
+    "good": "BON",
+    "time": "TEMPS"
+  },
   "pitch_comparison": {
     "title": "Aigu ou grave",
-    "description": "Devine si la 2e note est plus aiguë ou plus grave que la 1re."
+    "description": "Devine si la 2e note est plus aiguë ou plus grave que la 1re.",
+
+    "question": {
+      "tone_higher": "Quelle note est la plus aiguë?",
+      "tone_lower": "Quelle note est la plus grave?",
+      "button": {
+        "note": "Note {note}"
+      }
+    },
+    "footer": {
+      "start": "Commencer",
+      "check": "Vérifier",
+      "continue": "Continuer"
+    },
+    "answer": {
+      "correct": "Trop fort, tu as raison.",
+      "incorrect": "Mince, la bonne réponse était {correct_note}."
+    }
   },
   "interval_comparison": {
-    "title": "Quelle intervalle est plus grand ?",
+    "title": "L'intervalle le plus grand ?",
     "description": "Deux intervalles joués, à toi de dire lequel est le plus large."
   },
-  "find_interval_easy": {
-    "title": "Trouve l'intervalle (facile)",
+  "find_interval": {
+    "title": "Trouve l'intervalle",
     "description": "Devine l'intervalle parmi des propositions."
   },
-  "find_interval_expert": {
-    "title": "Trouve l'intervalle (expert)",
-    "description": "Un seul essai, choisis parmi tous les intervalles possibles."
-  },
   "note_and_interval": {
-    "title": "Une note un intervalle",
+    "title": "Note + intervalle",
     "description": "Avec une note et un intervalle trouve la note correspondante."
   }
 }

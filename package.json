@@ -11,6 +11,7 @@
     "lint": "expo lint"
   },
   "dependencies": {
+    "@expo-google-fonts/inter": "^0.2.3",
     "@expo/vector-icons": "^14.0.2",
     "@formatjs/intl-getcanonicallocales": "^2.5.5",
     "@formatjs/intl-locale": "^4.2.11",
@@ -19,6 +20,7 @@
     "@react-native-async-storage/async-storage": "1.23.1",
     "@react-native-firebase/app": "^21.12.1",
     "@react-native-firebase/messaging": "^21.12.1",
+    "@react-navigation/bottom-tabs": "^7.3.3",
     "@react-navigation/native": "^7.0.14",
     "@reduxjs/toolkit": "^2.6.1",
     "@supabase/supabase-js": "^2.49.1",
@@ -40,6 +42,7 @@
     "expo-symbols": "~0.2.2",
     "expo-system-ui": "~4.0.8",
     "expo-tracking-transparency": "~5.1.1",
+    "expo-updates": "~0.27.4",
     "expo-web-browser": "~14.0.2",
     "lottie-colorify": "^0.8.0",
     "lottie-react-native": "7.1.0",
@@ -48,6 +51,7 @@
     "react-dom": "18.3.1",
     "react-hook-form": "^7.54.2",
     "react-native": "0.76.7",
+    "react-native-audio-api": "^0.5.3",
     "react-native-gesture-handler": "~2.20.2",
     "react-native-pager-view": "6.5.1",
     "react-native-reanimated": "~3.16.1",
@@ -62,7 +66,7 @@
     "redux-persist-expo-filesystem": "^2.0.1",
     "tailwind-merge": "^3.0.2",
     "use-intl": "^4.0.2",
-    "expo-updates": "~0.27.4"
+    "expo-crypto": "~14.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

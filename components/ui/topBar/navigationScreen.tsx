@@ -11,7 +11,7 @@ import { twMerge } from '@/utils/twMerge';
 type UITopBarNavigationScreenProps = {
   title?: string;
   children?: React.ReactNode;
-  onClickLeftIcon?: () => void;
+  onPressLeftIcon?: () => void;
   leftIcon?: 'close' | 'back';
   leftIconRender?: React.ReactNode;
   isModal?: boolean;
@@ -22,7 +22,7 @@ type UITopBarNavigationScreenProps = {
 export default function UITopBarNavigationScreen({
   title,
   children,
-  onClickLeftIcon,
+  onPressLeftIcon,
   leftIcon = 'back',
   leftIconRender,
   isModal,
@@ -33,7 +33,7 @@ export default function UITopBarNavigationScreen({
   const router = useRouter();
 
   const onPress = () => {
-    if (onClickLeftIcon) return onClickLeftIcon();
+    if (onPressLeftIcon) return onPressLeftIcon();
     if (isModal) router.dismiss();
     else router.back();
   };

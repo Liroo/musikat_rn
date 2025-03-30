@@ -16,8 +16,10 @@ module.exports = {
         current: 'currentColor',
         transparent: 'transparent',
         primary: {
-          DEFAULT: '#1CD02E',
-          disabled: '#0B5312',
+          DEFAULT: '#CFFF5E',
+        },
+        secondary: {
+          DEFAULT: '#B9C5F9',
         },
         grey: {
           0: '#F5F5F5',
@@ -30,6 +32,7 @@ module.exports = {
           7: '#252525',
           8: '#151515',
           9: '#121212',
+          bg: '#292B2D',
         },
 
         ios: {
@@ -45,10 +48,17 @@ module.exports = {
         },
 
         communicative: {
-          positive: '#1CD02E',
-          negative: '#D01C1C',
-          informative: '#D0A31C',
-          notification: '#1C64D0',
+          positive: '#CFFF5E',
+          negative: '#EE5E37',
+          informative: '#B9C5F9',
+          notification: '#4558C8',
+        },
+
+        purple: {
+          DEFAULT: '#B9C5F9',
+        },
+        blue: {
+          DEFAULT: '#4558C8',
         },
       },
       fontFamily: {},

@@ -11,6 +11,8 @@ import {
 } from 'redux-persist';
 import ExpoFileSystemStorage from 'redux-persist-expo-filesystem';
 
+import learnUISlice from '@/features/learn/flux/ui/reducer';
+import onboardingUISlice from '@/features/onboarding/flux/ui/reducer';
 import listenerMiddleware from '@/flux/listenerMiddleware';
 import statusSlice from '@/flux/status/reducer';
 import toastSlice from '@/flux/toast/reducer';
@@ -18,13 +20,16 @@ export const makeStore = () => {
   const rootReducer = combineReducers({
     [statusSlice.name]: statusSlice.reducer,
     [toastSlice.name]: toastSlice.reducer,
+
+    [onboardingUISlice.name]: onboardingUISlice.reducer,
+    [learnUISlice.name]: learnUISlice.reducer,
   });
 
   const persistConfig = {
     key: 'musikat-root',
     version: 1,
     storage: ExpoFileSystemStorage,
-    whitelist: [],
+    whitelist: [onboardingUISlice.name],
   };
 
   const persistedReducer = persistReducer(persistConfig, rootReducer);

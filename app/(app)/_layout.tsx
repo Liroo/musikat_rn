@@ -1,16 +1,36 @@
 import { Stack } from 'expo-router';
+import { useEffect } from 'react';
 
-import HubHomeTopBar from '@/features/hub/views/home/topBar';
+import GuardOnboarding from '@/components/guards/onboarding';
+import { useAppDispatch } from '@/flux/hooks';
 
 export default function Layout() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    // dispatch(resetStore());
+  }, []);
+
   return (
-    <Stack
-      screenOptions={{
-        animationMatchesGesture: true,
-      }}>
-      <Stack.Screen name="(hub)/index" options={{ header: () => <HubHomeTopBar /> }} />
-      <Stack.Screen name="(hub)/progression" options={{ headerShown: false }} />
-      <Stack.Screen name="(hub)/settings" options={{ headerShown: false }} />
-    </Stack>
+    <GuardOnboarding isOnboarding={false}>
+      <Stack
+        screenOptions={{
+          animationMatchesGesture: true,
+        }}>
+        {/* Hub */}
+        <Stack.Screen
+          name="(hub)"
+          options={{
+            headerShown: false,
+          }}
+        />
+
+        {/* Learn */}
+        <Stack.Screen name="(learn)/findInterval" options={{ headerShown: false }} />
+        <Stack.Screen name="(learn)/intervalComparison" options={{ headerShown: false }} />
+        <Stack.Screen name="(learn)/noteAndInterval" options={{ headerShown: false }} />
+        <Stack.Screen name="(learn)/pitchComparison" options={{ headerShown: false }} />
+      </Stack>
+    </GuardOnboarding>
   );
 }
