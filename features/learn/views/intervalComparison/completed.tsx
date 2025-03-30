@@ -13,7 +13,7 @@ import UIText from '@/components/ui/text';
 import usePitchComparison from '@/features/learn/hooks/usePitchComparison';
 import { formatTime } from '@/utils/format';
 
-export default function LearnPitchComparisonCompleted() {
+export default function LearnIntervalComparisonCompleted() {
   const t = useTranslations('features.learn');
 
   const { exerciseData } = usePitchComparison();

@@ -13,11 +13,11 @@ import { learnGetNotesByOctave } from '@/features/learn/utils/notes';
 export interface PitchComparisonQuestion extends ExerciseQuestion {
   notes: [Note, Note];
   tone: Tone;
-  correctNoteIndex: number;
+  correctIndex: number;
 }
 
 export interface PitchComparisonAnswer extends ExerciseAnswer {
-  noteIndex: number;
+  index: number;
 }
 
 export type PitchComparisonExerciseData = ExerciseData<
@@ -57,12 +57,10 @@ export class PitchComparisonExercise extends Exercise<
       id: Crypto.randomUUID(),
       notes,
       tone,
-      correctNoteIndex: 0,
+      correctIndex: 0,
     };
 
-    question.correctNoteIndex = notes.findIndex((_, index) =>
-      this.verifyAnswer(question, { noteIndex: index })
-    );
+    question.correctIndex = notes.findIndex((_, index) => this.verifyAnswer(question, { index }));
 
     return question;
   }
@@ -70,18 +68,17 @@ export class PitchComparisonExercise extends Exercise<
   generateQuestions(settings: Record<string, any>): PitchComparisonQuestion[] {
     const nbQuestions = settings.nbQuestions || 10;
 
-    // Use an arrow function to maintain the 'this' context
     return Array.from({ length: nbQuestions }, () => this.generateQuestion());
   }
 
   verifyAnswer(
     question: PitchComparisonQuestion,
-    answer: Partial<PitchComparisonAnswer> & { noteIndex: number }
+    answer: Partial<PitchComparisonAnswer> & { index: number }
   ): boolean {
     const { notes, tone } = question;
-    const { noteIndex } = answer;
+    const { index } = answer;
 
-    const noteFrequency = notes[noteIndex].frequency;
+    const noteFrequency = notes[index].frequency;
 
     if (tone === Tone.High && notes.some((note) => note.frequency > noteFrequency)) return false;
     if (tone === Tone.Low && notes.some((note) => note.frequency < noteFrequency)) return false;

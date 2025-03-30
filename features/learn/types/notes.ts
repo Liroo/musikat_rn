@@ -30,6 +30,22 @@ export enum Interval {
   Octave = 'P8',
 }
 
+export const IntervalToSemitone: Record<Interval, number> = {
+  [Interval.Unison]: 0,
+  [Interval.MinorSecond]: 1,
+  [Interval.MajorSecond]: 2,
+  [Interval.MinorThird]: 3,
+  [Interval.MajorThird]: 4,
+  [Interval.PerfectFourth]: 5,
+  [Interval.Tritone]: 6,
+  [Interval.PerfectFifth]: 7,
+  [Interval.MinorSixth]: 8,
+  [Interval.MajorSixth]: 9,
+  [Interval.MinorSeventh]: 10,
+  [Interval.MajorSeventh]: 11,
+  [Interval.Octave]: 12,
+};
+
 export enum IntervalType {
   Ascending = 'ascending',
   Descending = 'descending',

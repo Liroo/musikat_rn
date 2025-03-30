@@ -2,6 +2,7 @@ import {
   Interval,
   IntervalType,
   Note,
+  NoteAndInterval,
   Notes,
   NotesSortedByFrequency,
 } from '@/features/learn/types/notes';
@@ -70,4 +71,45 @@ export function learnGetIntervalBetweenNotes(
     interval,
     intervalType: semitone > 0 ? IntervalType.Ascending : IntervalType.Descending,
   };
+}
+
+export function learnGenerateRandomInterval(): NoteAndInterval {
+  const intervalArray = Object.values(Interval);
+
+  const intervalIndex = Math.floor(Math.random() * intervalArray.length);
+  const intervalType = Math.random() < 0.5 ? IntervalType.Ascending : IntervalType.Descending;
+
+  let noteIndex: number;
+  if (intervalType === IntervalType.Ascending) {
+    const maxNoteIndex = NotesSortedByFrequency.length - intervalIndex - 1;
+    noteIndex = Math.floor(Math.random() * maxNoteIndex);
+  } else {
+    const minNoteIndex = intervalIndex;
+    const maxNoteIndex = NotesSortedByFrequency.length;
+    noteIndex = Math.floor(Math.random() * (maxNoteIndex - minNoteIndex)) + minNoteIndex;
+  }
+
+  const note = NotesSortedByFrequency[noteIndex];
+
+  return {
+    note,
+    interval: intervalArray[intervalIndex],
+    intervalType,
+  };
+}
+
+export function learnGetResultingNoteFromNoteAndInterval(noteAndInterval: NoteAndInterval): Note {
+  const { note, interval, intervalType } = noteAndInterval;
+
+  const intervalArray = Object.values(Interval);
+  const intervalIndex = intervalArray.findIndex((i) => i === interval);
+
+  const noteIndex = NotesSortedByFrequency.findIndex(
+    (n) => n.note === note.note && n.octave === note.octave && n.modifier === note.modifier
+  );
+
+  const resultingNoteIndex =
+    noteIndex + (intervalType === IntervalType.Ascending ? +1 : -1) * intervalIndex;
+
+  return NotesSortedByFrequency[resultingNoteIndex];
 }

@@ -1,6 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
 
 import { ExerciseType } from '@/features/learn/types/exercise';
+import { IntervalComparisonExerciseData } from '@/features/learn/utils/intervalComparison';
 import { PitchComparisonExerciseData } from '@/features/learn/utils/pitchComparison';
 import { RootState } from '@/flux/store';
 
@@ -8,8 +9,8 @@ const selectLearnUI = (state: RootState) => state.learn_ui;
 
 type ExerciseTypeValueMap = {
   [ExerciseType.PitchComparison]: PitchComparisonExerciseData;
+  [ExerciseType.IntervalComparison]: IntervalComparisonExerciseData;
   [ExerciseType.NoteAndInterval]: any;
-  [ExerciseType.IntervalComparison]: any;
   [ExerciseType.FindInterval]: any;
 };
 

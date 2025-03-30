@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { learnUISetExerciseByType } from '@/features/learn/flux/ui/reducer';
 import { selectLearnUIExerciseByType } from '@/features/learn/flux/ui/selector';
 import { ExerciseAnswer, ExerciseState, ExerciseType } from '@/features/learn/types/exercise';
+import { IntervalComparisonExercise } from '@/features/learn/utils/intervalComparison';
 import { PitchComparisonExercise } from '@/features/learn/utils/pitchComparison';
 import { useAppDispatch, useAppSelector } from '@/flux/hooks';
 
@@ -25,6 +26,8 @@ export default function useExercise<T extends ExerciseType>(exerciseType: T) {
     switch (exerciseType) {
       case ExerciseType.PitchComparison:
         return new PitchComparisonExercise();
+      case ExerciseType.IntervalComparison:
+        return new IntervalComparisonExercise();
       default:
         throw new Error(`Exercise type ${exerciseType} not supported`);
     }
@@ -49,7 +52,7 @@ export default function useExercise<T extends ExerciseType>(exerciseType: T) {
   };
 
   const answerQuestion = (answer: Omit<(typeof exerciseData)['answers'][number], 'isCorrect'>) => {
-    const isCorrect = answer.noteIndex === currentQuestion.correctNoteIndex;
+    const isCorrect = answer.index === currentQuestion.correctIndex;
 
     dispatch(
       learnUISetExerciseByType({

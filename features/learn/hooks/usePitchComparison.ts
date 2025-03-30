@@ -9,57 +9,74 @@ import { learnGetIntervalBetweenNotes } from '@/features/learn/utils/notes';
 export default function usePitchComparison() {
   const t = useTranslations('features.learn');
 
-  const { exerciseData, nextQuestion, answerQuestion, currentQuestion, currentAnswer } =
-    useExercise<ExerciseType.PitchComparison>(ExerciseType.PitchComparison);
+  const {
+    exerciseData,
+    nextQuestion,
+    answerQuestion,
+    currentQuestion,
+    currentAnswer,
+    startExercise,
+    resetExercise,
+  } = useExercise<ExerciseType.PitchComparison>(ExerciseType.PitchComparison);
 
   const interval = useMemo(() => {
-    return learnGetIntervalBetweenNotes(currentQuestion.notes[0], currentQuestion.notes[1]);
-  }, [currentQuestion.notes]);
+    if (!currentQuestion) return null;
 
-  const correctMessage = useMemo(() => {
-    if (!currentQuestion || !interval) return '';
+    return learnGetIntervalBetweenNotes(currentQuestion.notes[0], currentQuestion.notes[1]);
+  }, [currentQuestion?.notes]);
+
+  const correctMessageData = useMemo(() => {
+    if (!currentQuestion || !interval) return {};
 
     const intervalTKey =
       interval.intervalType === IntervalType.Ascending ? 'ascending' : 'descending';
     const intervalGender = t('interval.gender.' + interval.interval);
     const intervalName = t('interval.' + intervalTKey + '.' + interval.interval);
 
-    return t('pitch_comparison.answer.correct', {
-      correct_note: t('notes.' + currentQuestion.notes[currentQuestion.correctNoteIndex].note, {
-        octave: '',
-        modifier: currentQuestion.notes[0].modifier || '',
-      }),
-      semitones: interval.semitone,
-      interval: intervalGender + ' ' + intervalName,
-    });
+    return {
+      key: 'features.learn.pitch_comparison.answer.correct',
+      data: {
+        correct_note: t('notes.' + currentQuestion.notes[currentQuestion.correctIndex].note, {
+          octave: '',
+          modifier: currentQuestion.notes[0].modifier || '',
+        }),
+        semitones: interval.semitone,
+        interval: intervalGender + ' ' + intervalName,
+      },
+    };
   }, [interval, currentQuestion]);
 
-  const incorrectMessage = useMemo(() => {
-    if (!currentQuestion || !interval) return '';
+  const incorrectMessageData = useMemo(() => {
+    if (!currentQuestion || !interval) return {};
 
     const intervalTKey =
       interval.intervalType === IntervalType.Ascending ? 'ascending' : 'descending';
     const intervalGender = t('interval.gender.' + interval.interval);
     const intervalName = t('interval.' + intervalTKey + '.' + interval.interval);
 
-    return t('pitch_comparison.answer.incorrect', {
-      correct_note: t('notes.' + currentQuestion.notes[currentQuestion.correctNoteIndex].note, {
-        octave: '',
-        modifier: currentQuestion.notes[0].modifier || '',
-      }),
-      semitones: interval.semitone,
-      interval: intervalGender + ' ' + intervalName,
-    });
+    return {
+      key: 'features.learn.pitch_comparison.answer.incorrect',
+      data: {
+        correct_note: t('notes.' + currentQuestion.notes[currentQuestion.correctIndex].note, {
+          octave: '',
+          modifier: currentQuestion.notes[0].modifier || '',
+        }),
+        semitones: interval.semitone,
+        interval: intervalGender + ' ' + intervalName,
+      },
+    };
   }, [interval, currentQuestion]);
 
   return {
     exerciseData,
     nextQuestion,
     answerQuestion,
+    startExercise,
+    resetExercise,
     currentQuestion,
     currentAnswer,
     interval,
-    correctMessage,
-    incorrectMessage,
+    correctMessageData,
+    incorrectMessageData,
   };
 }

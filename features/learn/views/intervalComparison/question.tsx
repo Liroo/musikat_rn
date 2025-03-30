@@ -7,13 +7,12 @@ import LearnExerciseFooterAnswer from '@/features/learn/components/exercise/foot
 import LearnExerciseProgress from '@/features/learn/components/exercise/progress';
 import LearnExerciseQuestionButton from '@/features/learn/components/exercise/question/button';
 import LearnExerciseQuestionTitle from '@/features/learn/components/exercise/question/title';
-import usePitchComparison from '@/features/learn/hooks/usePitchComparison';
-import { Tone } from '@/features/learn/types/notes';
-import { learnFlatNoteToSharpNote } from '@/features/learn/utils/notes';
+import useIntervalComparison from '@/features/learn/hooks/useIntervalComparison';
+import { learnGetResultingNoteFromNoteAndInterval } from '@/features/learn/utils/notes';
 import { pianoSound } from '@/features/learn/utils/sound';
 import { twMerge } from '@/utils/twMerge';
 
-export default function LearnPitchComparisonQuestion() {
+export default function LearnIntervalComparisonQuestion() {
   const t = useTranslations('features.learn');
   const {
     exerciseData,
@@ -23,7 +22,7 @@ export default function LearnPitchComparisonQuestion() {
     currentAnswer,
     correctMessageData,
     incorrectMessageData,
-  } = usePitchComparison();
+  } = useIntervalComparison();
 
   const [selectedButtonIndex, setSelectedButtonIndex] = useState<number | null>(null);
 
@@ -49,18 +48,30 @@ export default function LearnPitchComparisonQuestion() {
   };
 
   // Intro "animation"
-  const [introIndex, setIntroIndex] = useState(0);
+  const [introIndex, setIntroIndex] = useState(-1);
   useEffect(() => {
     setIntroIndex(0);
-    pianoSound.playNote(currentQuestion.notes[0]);
+    pianoSound.playNotes(
+      [
+        currentQuestion.intervals[0].note,
+        learnGetResultingNoteFromNoteAndInterval(currentQuestion.intervals[0]),
+      ],
+      400
+    );
     setTimeout(() => {
       setIntroIndex(1);
-      pianoSound.playNote(currentQuestion.notes[1]);
+      pianoSound.playNotes(
+        [
+          currentQuestion.intervals[1].note,
+          learnGetResultingNoteFromNoteAndInterval(currentQuestion.intervals[1]),
+        ],
+        400
+      );
       setTimeout(() => {
         setIntroIndex(-1);
         startTimer.current = Date.now();
-      }, 500);
-    }, 500);
+      }, 1500);
+    }, 1500);
   }, [currentQuestion.id]);
 
   return (
@@ -78,24 +89,17 @@ export default function LearnPitchComparisonQuestion() {
           totalQuestions={exerciseData.questions.length}
         />
 
-        <LearnExerciseQuestionTitle
-          title={
-            currentQuestion.tone === Tone.High
-              ? t('pitch_comparison.question.tone_higher')
-              : t('pitch_comparison.question.tone_lower')
-          }
-        />
+        <LearnExerciseQuestionTitle title={t('interval_comparison.question.title')} />
 
         <View className="mx-[20px] mt-[40%] flex-1 flex-row gap-[10px]">
           <LearnExerciseQuestionButton
             className={introIndex === 0 ? 'pointer-events-none z-50' : ''}
             label={
               currentAnswer
-                ? t('notes.' + learnFlatNoteToSharpNote(currentQuestion.notes[0]).note, {
-                    octave: '',
-                    modifier: learnFlatNoteToSharpNote(currentQuestion.notes[0]).modifier || '',
-                  })
-                : t('pitch_comparison.question.button.note', { note: '01' })
+                ? t(
+                    `interval.${currentQuestion.intervals[0].intervalType}.${currentQuestion.intervals[0].interval}`
+                  )
+                : t('interval_comparison.question.button.interval', { interval: '01' })
             }
             correct={
               currentAnswer &&
@@ -109,7 +113,13 @@ export default function LearnPitchComparisonQuestion() {
                 : ''
             }
             onPress={() => {
-              pianoSound.playNote(currentQuestion.notes[0]);
+              pianoSound.playNotes(
+                [
+                  currentQuestion.intervals[0].note,
+                  learnGetResultingNoteFromNoteAndInterval(currentQuestion.intervals[0]),
+                ],
+                400
+              );
               if (currentAnswer) return;
               setSelectedButtonIndex(0);
             }}
@@ -118,11 +128,10 @@ export default function LearnPitchComparisonQuestion() {
             className={introIndex === 1 ? 'pointer-events-none z-50' : ''}
             label={
               currentAnswer
-                ? t('notes.' + learnFlatNoteToSharpNote(currentQuestion.notes[1]).note, {
-                    octave: '',
-                    modifier: learnFlatNoteToSharpNote(currentQuestion.notes[1]).modifier || '',
-                  })
-                : t('pitch_comparison.question.button.note', { note: '02' })
+                ? t(
+                    `interval.${currentQuestion.intervals[1].intervalType}.${currentQuestion.intervals[1].interval}`
+                  )
+                : t('interval_comparison.question.button.interval', { interval: '02' })
             }
             buttonClassName={
               (!currentAnswer && selectedButtonIndex === 1) || introIndex === 1
@@ -136,7 +145,13 @@ export default function LearnPitchComparisonQuestion() {
             }
             incorrect={currentAnswer && currentAnswer?.index === 1 && !currentAnswer.isCorrect}
             onPress={() => {
-              pianoSound.playNote(currentQuestion.notes[1]);
+              pianoSound.playNotes(
+                [
+                  currentQuestion.intervals[1].note,
+                  learnGetResultingNoteFromNoteAndInterval(currentQuestion.intervals[1]),
+                ],
+                400
+              );
               if (currentAnswer) return;
               setSelectedButtonIndex(1);
             }}

@@ -54,6 +54,12 @@ class InstrumentSound {
     return source;
   }
 
+  playNotes(notes: Note[], delay: number = 0) {
+    notes.forEach((note, index) => {
+      setTimeout(() => this.playNote(note), index * delay);
+    });
+  }
+
   stopEveryNote() {
     Object.keys(this.playingNote).forEach((key) => {
       if (this.playingNote[key]) {

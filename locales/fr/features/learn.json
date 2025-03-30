@@ -63,7 +63,10 @@
     "finish": "Terminer",
     "wrong": "MAUVAIS",
     "good": "BON",
-    "time": "TEMPS"
+    "time": "TEMPS",
+    "start": "Commencer",
+    "check": "Vérifier",
+    "continue": "Continuer"
   },
   "pitch_comparison": {
     "title": "Aigu ou grave",
@@ -76,19 +79,25 @@
         "note": "Note {note}"
       }
     },
-    "footer": {
-      "start": "Commencer",
-      "check": "Vérifier",
-      "continue": "Continuer"
-    },
     "answer": {
-      "correct": "Trop fort, tu as raison. Entre ces notes il y a {semitones} demi-tons, et ça s'appelle une {interval}.",
-      "incorrect": "Mince, la bonne réponse était {correct_note}. Entre ces notes il y a {semitones} demi-tons, et ça s'appelle une {interval}."
+      "correct": "Trop fort, tu as raison.<br></br>Entre ces notes il y a <bold>{semitones} {semitones, plural, one {demi-ton} other {demi-tons}}</bold>, et ça s'appelle <bold>{interval}</bold>.",
+      "incorrect": "Mince, la bonne réponse était <bold>{correct_note}</bold>.<br></br>Entre ces notes il y a <bold>{semitones} {semitones, plural, one {demi-ton} other {demi-tons}}</bold>, et ça s'appelle <bold>{interval}</bold>."
     }
   },
   "interval_comparison": {
     "title": "L'intervalle le plus grand ?",
-    "description": "Deux intervalles joués, à toi de dire lequel est le plus large."
+    "description": "Deux intervalles joués, à toi de dire lequel est le plus grand.",
+
+    "question": {
+      "title": "Quel intervalle est le plus grand ?",
+      "button": {
+        "interval": "Intervalle {interval}"
+      }
+    },
+    "answer": {
+      "correct": "Trop fort, tu as raison.<br></br>Dans cet intervalle il y a <bold>{semitones} {semitones, plural, one {demi-ton} other {demi-tons}}</bold> (<bold>{first_note}</bold>→<bold>{second_note}</bold>), et ça s'appelle <bold>{interval}</bold>.<br></br>Dans l'autre, il y avait <bold>{other_semitones} {semitones, plural, one {demi-ton} other {demi-tons}}</bold> (<bold>{other_first_note}</bold>→<bold>{other_second_note}</bold>), et ça s'appelle <bold>{other_interval}</bold>.",
+      "incorrect": "Mince, la bonne réponse était l'intervalle <bold>{correct_interval}</bold>.<br></br>Dans le bon intervalle il y a <bold>{semitones} {semitones, plural, one {demi-ton} other {demi-tons}}</bold> (<bold>{first_note}</bold>→<bold>{second_note}</bold>), et ça s'appelle <bold>{interval}</bold>.<br></br>Dans l'autre, il y avait <bold>{other_semitones} {semitones, plural, one {demi-ton} other {demi-tons}}</bold> (<bold>{other_first_note}</bold>→<bold>{other_second_note}</bold>), et ça s'appelle <bold>{other_interval}</bold>."
+    }
   },
   "find_interval": {
     "title": "Trouve l'intervalle",

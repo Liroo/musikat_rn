@@ -36,7 +36,7 @@ export default function LearnExerciseQuestionButton({
           buttonClassName,
           backgroundClassname
         )}>
-        <UIText className="text-[15px] text-black">{label}</UIText>
+        <UIText className="text-center text-[15px] text-black">{label}</UIText>
       </UIPressable>
     </View>
   );
