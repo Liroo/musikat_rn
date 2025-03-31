@@ -15,11 +15,9 @@ class InstrumentSound {
 
   constructor(instrument: Instrument) {
     this.instrument = instrument;
-
-    this.loadInstrument();
   }
 
-  private async loadInstrument() {
+  async loadInstrument() {
     const sourceList = this.instrument === Instrument.Piano ? pianoAudioFiles : guitarAudioFiles;
 
     const audioFiles = await Asset.loadAsync(sourceList.map((file) => file[1]));

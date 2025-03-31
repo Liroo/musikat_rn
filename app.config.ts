@@ -61,6 +61,12 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
           '$(PRODUCT_NAME) requires tracking permission for analytics purposes',
       },
     ],
+    [
+      'expo-asset',
+      {
+        assets: ['./assets/audio/instruments/piano', './assets/audio/instruments/guitar'],
+      },
+    ],
   ],
   experiments: {
     typedRoutes: true,

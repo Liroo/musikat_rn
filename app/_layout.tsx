@@ -36,6 +36,7 @@ import { IntlProvider } from 'use-intl';
 import MonumentExtended_400Regular from '@/assets/fonts/MonumentExtended-Regular.otf';
 import StoreProvider from '@/components/providers/store';
 import UIToaster from '@/components/ui/toaster';
+import { guitarSound, pianoSound } from '@/features/learn/utils/sound';
 import locales from '@/locales';
 
 configureReanimatedLogger({
@@ -51,7 +52,7 @@ cssInterop(LinearGradient, { className: 'style' });
 cssInterop(BottomSheetView, { className: 'style' });
 
 export default function Layout() {
-  const [loaded, error] = useFonts({
+  const [loaded] = useFonts({
     // Inter
     Inter_thin: Inter_100Thin,
     Inter_extralight: Inter_200ExtraLight,
@@ -67,12 +68,16 @@ export default function Layout() {
   });
 
   useEffect(() => {
-    if (loaded || error) {
+    const loadInstruments = async () => {
+      await pianoSound.loadInstrument();
+      await guitarSound.loadInstrument();
       setTimeout(() => SplashScreen.hideAsync(), 1000);
-    }
-  }, [loaded, error]);
+    };
 
-  if (!loaded && !error) return null;
+    if (loaded) loadInstruments();
+  }, [loaded]);
+
+  if (!loaded) return null;
 
   return (
     <IntlProvider messages={locales['fr']} locale="fr">

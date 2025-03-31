@@ -33,7 +33,7 @@ export default function HubHome() {
 
   return (
     <ScrollView
-      className="flex-1 px-[20px]"
+      className="flex-1 bg-white px-[20px]"
       contentContainerStyle={{ paddingTop: top }}
       showsVerticalScrollIndicator={false}>
       <HubTitle tKey="features.hub.home.title" />
